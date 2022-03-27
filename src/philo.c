@@ -1,45 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanjeon <sanjeon@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/26 19:52:43 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/03/27 23:01:15 by sanjeon          ###   ########.fr       */
+/*   Created: 2022/03/27 21:51:39 by sanjeon           #+#    #+#             */
+/*   Updated: 2022/03/27 22:47:41 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <unistd.h>
-#include <errno.h>
 
-int				g_fork = 0;
-pthread_mutex_t **g_m = 0;
-
-void	*print_thread(void *num)
+void	*even_philo(void *a)
 {
-	int	i = -1;
+	int	num;
+	int	i;
+
+	num = *((int *)a);
+	i = -1;
 	while (++i < 5)
 	{
-		printf("I'm No.%d Thread %d\n", *(int *)num, i);
-		sleep(1);
+		pthread_mutex_lock(g_m[num]);
+		printf("I'm evne %d\nI'm get %dfork!\n", num, g_fork);
+		g_fork++;
+		pthread_mutex_unlock(g_m[num]);
 	}
 	return (0);
 }
 
-int main(int argc, char *argv[])
+void	*odd_philo(void *a)
 {
-	// int	i;
-	t_arg	arg;
+	int	num;
+	int	i;
 
-	if (parsing(argc, argv, &arg) == 0)
+	num = *((int *)a);
+	i = -1;
+	while (++i < 5)
 	{
-		perror("ERROR\nImproper parameter");
-		return (0);
+		pthread_mutex_lock(g_m[num]);
+		printf("I'm odd %d\nI'm get %dfork!\n", num, g_fork);
+		g_fork++;
+		pthread_mutex_unlock(g_m[num]);
 	}
-	if (init_mutex(arg.num_eat) == 0)
-		p_error("Error\n: Failed init_mutex", &arg);
-	create_philo(&arg);
 	return (0);
 }

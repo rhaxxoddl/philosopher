@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: sanjeon <sanjeon@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:19:53 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/03/27 18:50:43 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/03/27 23:02:44 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,27 @@ void	init_arg(int argc, t_arg *arg)
 	arg->time_sleep = 0;
 	if (argc == 6)
 		arg->num_eat = 0;
+}
+
+int		init_mutex(int num_philo)
+{
+	int	i;
+
+	i = -1;
+	/*
+	이미 할당된 곳에 할당한다고 오류남. mutex 하나로 여러 개의 변수를 동기화할 수 있는가?
+	*/
+	g_m = ft_calloc(num_philo, sizeof(pthread_mutex_t));
+	if (g_m != 0)
+		return (0);
+	while (++i < num_philo)
+	{
+		if (pthread_mutex_init(g_m[i], NULL) == 0)
+		{
+			while (--i >= 0)
+				pthread_mutex_destroy(g_m[i]);
+			return (0);
+		}
+	}
+	return (1);
 }

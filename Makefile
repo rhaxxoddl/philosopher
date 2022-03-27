@@ -12,7 +12,8 @@ CFLAGS		=	-Wall -Wextra -Werror
 DEBUGFLAG	= -fsanitize=address -g3
 LDFLAGS		=	-lc
 
-SRCS		=	./src/main.c
+SRCS		=	./src/main.c\
+				./src/parsing.c
 SRCS_DIR	=	./src
 OBJS		=	$(SRCS:.c=.o)
 ARFS		=	$(LIB_DIR)/Libft.a

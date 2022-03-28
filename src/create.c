@@ -3,25 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   create.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sanjeon <sanjeon@student.42.kr>            +#+  +:+       +#+        */
+/*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 21:55:41 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/03/27 22:59:31 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/03/28 10:39:46 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	create_philo(t_arg *arg)
+void	create_philo(t_philo_arg *arg)
 {
 	int	status;
 	int	i;
 
 	status = 0;
 	i = -1;
-	arg->t_pid = ft_calloc(arg->num_philo + 1, sizeof(pthread_t));
-	if (arg->t_pid == 0)
-		p_error("Error\n: Failed allocate t_pid", arg);
 	while (++i < arg->num_philo)
 	{
 		if (i % 2 == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sanjeon <sanjeon@student.42.kr>            +#+  +:+       +#+        */
+/*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:35:28 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/03/27 22:55:35 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/03/28 10:24:37 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,29 @@
 # include <stdio.h>
 # include "libft.h"
 
-extern int				g_fork;
-extern pthread_mutex_t	**g_m;
+typedef struct s_philo_arg
+{
+	int				philo_seq;
+	int				num_philo;
+	int				time_die;
+	int				time_eat;
+	int				time_sleep;
+	int				num_eat;
+	pthread_t		*t_pid;
+	pthread_mutex_t	**m;
+	int				fork;
+}				t_philo_arg;
 
-typedef struct s_arg{
-	int	num_philo;
-	int	time_die;
-	int	time_eat;
-	int	time_sleep;
-	int	num_eat;
-	pthread_t *t_pid;
-}				t_arg;
 // create.c
-void	create_philo(t_arg *arg);
+void	create_philo(t_philo_arg *arg);
 // error.c
-void	p_error(char *error_message, t_arg *arg);
-void	free_all(t_arg *arg);
+void	p_error(char *error_message, t_philo_arg *arg);
+void	free_all(t_philo_arg *arg);
 // parsing.c
-int		parsing(int argc, char *argv[], t_arg *arg);
+int		parsing(int argc, char *argv[], t_philo_arg *arg);
 int		check_isnum(int argc, char *argv[]);
-void	init_arg(int argc, t_arg *arg);
-int		init_mutex(int num_philo);
+void	init_arg(int argc, t_philo_arg *arg);
+int		init_mutex(t_philo_arg *arg);
 // philo.c
 void	*even_philo(void *a);
 void	*odd_philo(void *a);

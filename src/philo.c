@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sanjeon <sanjeon@student.42.kr>            +#+  +:+       +#+        */
+/*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 21:51:39 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/03/27 22:47:41 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/03/28 11:39:59 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,43 @@
 
 void	*even_philo(void *a)
 {
-	int	num;
+	t_philo_arg	*arg;
 	int	i;
 
-	num = *((int *)a);
+	arg = a;
 	i = -1;
 	while (++i < 5)
 	{
-		pthread_mutex_lock(g_m[num]);
-		printf("I'm evne %d\nI'm get %dfork!\n", num, g_fork);
-		g_fork++;
-		pthread_mutex_unlock(g_m[num]);
+		printf("arg->m : %p\n", arg->m[arg->philo_seq]);
+		if (pthread_mutex_lock(arg->m[arg->philo_seq]) != 0)
+			write(1, "no\n", 3);
+		printf("I'm evne %d\nI'm get %dfork!\n", arg->philo_seq, arg->fork);
+		arg->fork++;
+		pthread_mutex_unlock(arg->m[arg->philo_seq]);
 	}
+	pthread_mutex_lock(arg->m[arg->philo_seq]);
+	arg->num_philo--;
+	pthread_mutex_unlock(arg->m[arg->philo_seq]);
 	return (0);
 }
 
 void	*odd_philo(void *a)
 {
-	int	num;
+	t_philo_arg	*arg;
 	int	i;
 
-	num = *((int *)a);
+	arg = a;
 	i = -1;
 	while (++i < 5)
 	{
-		pthread_mutex_lock(g_m[num]);
-		printf("I'm odd %d\nI'm get %dfork!\n", num, g_fork);
-		g_fork++;
-		pthread_mutex_unlock(g_m[num]);
+		printf("%p\n", arg->m);
+		// pthread_mutex_lock(arg->m[arg->philo_seq]);
+		printf("I'm odd %d\nI'm get %dfork!\n", arg->philo_seq, arg->fork);
+		arg->fork++;
+		// pthread_mutex_unlock(arg->m[arg->philo_seq]);
 	}
+	// pthread_mutex_lock(arg->m[arg->philo_seq]);
+	arg->num_philo--;
+	// pthread_mutex_unlock(arg->m[arg->philo_seq]);
 	return (0);
 }

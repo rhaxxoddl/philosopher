@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 19:52:43 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/03/28 10:39:38 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/03/29 18:15:52 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@ void	*print_thread(void *num)
 
 int main(int argc, char *argv[])
 {
-	t_philo_arg	arg;
+	t_info	info;
+	pthread_t **t_id;
 
-	if (parsing(argc, argv, &arg) == 0)
+	t_id = 0;
+	if (parsing(argc, argv, &info, t_id) == 0)
 	{
 		perror("ERROR\nImproper parameter");
 		return (0);
 	}
 	// if (init_mutex(&arg) == 0)
 	// 	p_error("Error\n: Failed init_mutex", &arg);
-	create_philo(&arg);
-	printf("create\n");
-
-	while (arg.num_philo != 0)
+	create_philo(&info, t_id);
+	while (info.num_philo > 0)
 	{
 		usleep(1);
 	}

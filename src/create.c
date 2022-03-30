@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 21:55:41 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/03/30 11:52:22 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/03/30 18:01:08 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_philo	**init_philo(t_info *info)
 	i = -1;
 	while (++i < info->num_philo)
 	{
-		philo[i] = (t_philo *)ft_calloc(1,sizeof(t_philo *));
+		philo[i] = (t_philo *)ft_calloc(1,sizeof(t_philo));
 		if (philo[i] == 0)
 		{
 			free_t_philo(philo);
@@ -66,8 +66,7 @@ t_philo	**init_philo(t_info *info)
 		}
 		philo[i]->info = info;
 		philo[i]->philo_seq = i + 1;
-		philo[i]->num_eat = info->num_eat;
-		
+		philo[i]->num_eat = info->req_eat;
 	}
 	return (philo);
 }

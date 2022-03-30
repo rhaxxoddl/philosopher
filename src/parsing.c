@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:19:53 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/03/30 11:31:05 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/03/30 18:39:29 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,32 @@ int	parsing(int argc, char *argv[], t_info *info)
 	if (argc < 5 || argc > 6 || check_isnum(argc, argv) == 0)
 		return (0);
 	init_info(argc, info);
+	info->start_time = get_time();
+	printf("start time : %ld\n", info->start_time);
 	info->num_philo = ft_atoi(argv[1]);
 	info->time_die = ft_atoi(argv[2]);
 	info->time_eat = ft_atoi(argv[3]);
 	info->time_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
-		info->num_eat = ft_atoi(argv[5]);
-	info->fork = 0;
-	if (init_sam_mutex(info) == 0)
+		info->req_eat = ft_atoi(argv[5]);
+	else
+		info->req_eat = -1;
+	info->fork = (int *)ft_calloc((info->num_philo) + 1, sizeof(int));
+	if (init_mutex(info) == 0)
 		p_error("Error\n: Failed init mutex", info);
 	info->t_id = init_t_id(info->num_philo);
 	if (info->t_id == 0)
 		p_error("Error\n: Failed allocate t_pid", info);
 	return (1);
+}
+
+long	get_time()
+{
+	struct timeval tv;
+
+	if (gettimeofday(&tv, NULL) == -1)
+		return (-1);
+	return (tv.tv_usec);
 }
 
 pthread_t	**init_t_id(int num_philo)
@@ -74,35 +87,17 @@ int	check_isnum(int argc, char *argv[])
 
 void	init_info(int argc, t_info *info)
 {
+	info->start_time = 0;
 	info->num_philo = 0;
 	info->time_die = 0;
 	info->time_eat = 0;
 	info->time_sleep = 0;
 	if (argc == 6)
-		info->num_eat = 0;
+		info->req_eat = 0;
 	info->fork = 0;
 	info->m = 0;
 	info->t_id = 0;
 	info->del_philo = 0;
-}
-
-int		init_sam_mutex(t_info *info)
-{
-	int	status = 0;
-	info->m = (pthread_mutex_t **)ft_calloc(2, sizeof(pthread_mutex_t *));
-	if (info->m == 0)
-		return (0);
-	info->m[0] = (pthread_mutex_t *)ft_calloc(1, sizeof(pthread_mutex_t));
-	if (info->m[0] == 0)
-		return (0);
-	info->m[1] = (pthread_mutex_t *)ft_calloc(1, sizeof(pthread_mutex_t));
-	if (info->m[1] == 0)
-		free(info->m[0]);
-	if ((status = pthread_mutex_init(info->m[0], NULL)) != 0)
-		return (-1);
-	if ((status = pthread_mutex_init(info->m[1], NULL)) != 0)
-		return (-1);
-	return (1);
 }
 
 int		init_mutex(t_info *info)
@@ -111,10 +106,10 @@ int		init_mutex(t_info *info)
 	int	i;
 
 	i = -1;
-	info->m = (pthread_mutex_t **)ft_calloc(info->num_philo, sizeof(pthread_mutex_t *));
+	info->m = (pthread_mutex_t **)ft_calloc(info->num_philo + 1, sizeof(pthread_mutex_t *));
 	if (info->m == 0)
 		return (0);
-	while (++i < info->num_philo)
+	while (++i <= info->num_philo)
 	{
 		info->m[i] = (pthread_mutex_t *)ft_calloc(1, sizeof(pthread_mutex_t));
 		if (info->m[i] == 0)
@@ -123,7 +118,7 @@ int		init_mutex(t_info *info)
 				free(info->m[i]);
 		}
 	}
-	while (++i < info->num_philo)
+	while (++i <= info->num_philo)
 	{
 		if ((status = pthread_mutex_init(info->m[i], NULL)) != 0)
 		{

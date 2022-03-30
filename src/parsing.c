@@ -6,29 +6,52 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:19:53 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/03/29 18:16:26 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/03/30 11:18:51 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	parsing(int argc, char *argv[], t_info *info, pthread_t **t_id)
+int	parsing(int argc, char *argv[], t_info *info)
 {
 	if (argc < 5 || argc > 6 || check_isnum(argc, argv) == 0)
 		return (0);
-	init_arg(argc, info);
+	init_info(argc, info);
 	info->num_philo = ft_atoi(argv[1]);
 	info->time_die = ft_atoi(argv[2]);
 	info->time_eat = ft_atoi(argv[3]);
 	info->time_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		info->num_eat = ft_atoi(argv[5]);
-	t_id = (pthread_t **)ft_calloc(info->num_philo + 1, sizeof(pthread_t));
-	if (*t_id == 0)
-		p_error("Error\n: Failed allocate t_pid", info);
+	info->fork = 0;
 	if (init_sam_mutex(info) == 0)
 		p_error("Error\n: Failed init mutex", info);
+	info->t_id = init_t_id(info->num_philo);
+	if (info->t_id == 0)
+		p_error("Error\n: Failed allocate t_pid", info);
 	return (1);
+}
+
+pthread_t	**init_t_id(int num_philo)
+{
+	pthread_t	**t_id;
+	int			i;
+
+	t_id = 0;
+	i = -1;
+	t_id = (pthread_t **)ft_calloc(num_philo, sizeof(pthread_t *));
+	if (t_id == 0)
+		return (0);
+	while (++i < num_philo)
+	{
+		t_id[i] = (pthread_t *)ft_calloc(1, sizeof(pthread_t));
+		if (t_id[i] == 0)
+		{
+			free_t_id(t_id);
+			return (0);
+		}
+	}
+	return (t_id);
 }
 
 int	check_isnum(int argc, char *argv[])
@@ -49,7 +72,7 @@ int	check_isnum(int argc, char *argv[])
 	return (1);
 }
 
-void	init_arg(int argc, t_info *info)
+void	init_info(int argc, t_info *info)
 {
 	info->num_philo = 0;
 	info->time_die = 0;
@@ -57,8 +80,10 @@ void	init_arg(int argc, t_info *info)
 	info->time_sleep = 0;
 	if (argc == 6)
 		info->num_eat = 0;
-	info->m = 0;
 	info->fork = 0;
+	info->m = 0;
+	info->t_id = 0;
+	info->del_philo = 0;
 }
 
 int		init_sam_mutex(t_info *info)

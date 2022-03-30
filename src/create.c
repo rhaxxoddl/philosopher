@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 21:55:41 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/03/30 11:18:49 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/03/30 11:52:22 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int	create_philo(t_info *info)
 		return (0);
 	while (++i < info->num_philo)
 	{
-		// if (i % 2 == 0)
+		if (i % 2 == 1)
 			status = pthread_create(info->t_id[i], NULL, even_philo, (void *)philo[i]);
-		// else
-		// 	status = pthread_create(&(arg->t_id[i]), NULL, odd_philo, (void *)&i);
+		else
+			status = pthread_create(info->t_id[i], NULL, odd_philo, (void *)philo[i]);
 		if (status < 0)
 			p_error("Error\n: Failed create thread", info);
 	}

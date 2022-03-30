@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:19:53 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/03/30 11:18:51 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/03/30 11:31:05 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,20 +89,19 @@ void	init_info(int argc, t_info *info)
 int		init_sam_mutex(t_info *info)
 {
 	int	status = 0;
-	// arg->m = (pthread_mutex_t **)ft_calloc(arg->num_philo, sizeof(pthread_mutex_t *));
-	info->m = (pthread_mutex_t **)ft_calloc(1, sizeof(pthread_mutex_t *));
+	info->m = (pthread_mutex_t **)ft_calloc(2, sizeof(pthread_mutex_t *));
 	if (info->m == 0)
 		return (0);
 	info->m[0] = (pthread_mutex_t *)ft_calloc(1, sizeof(pthread_mutex_t));
 	if (info->m[0] == 0)
 		return (0);
-	// arg->m[1] = (pthread_mutex_t *)ft_calloc(1, sizeof(pthread_mutex_t));
-	// if (arg->m[1] == 0)
-		// free(arg->m[0]);
+	info->m[1] = (pthread_mutex_t *)ft_calloc(1, sizeof(pthread_mutex_t));
+	if (info->m[1] == 0)
+		free(info->m[0]);
 	if ((status = pthread_mutex_init(info->m[0], NULL)) != 0)
 		return (-1);
-	// if ((status = pthread_mutex_init(arg->m[1], NULL)) != 0)
-	// 	return (-1);
+	if ((status = pthread_mutex_init(info->m[1], NULL)) != 0)
+		return (-1);
 	return (1);
 }
 

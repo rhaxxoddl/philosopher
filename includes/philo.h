@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:35:28 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/03/30 11:06:54 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/03/30 11:35:55 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ int		init_sam_mutex(t_info *info);
 // philo.c
 void	*even_philo(void *a);
 void	*odd_philo(void *a);
-void	add_fork(t_info *info, int num);
+void	add_fork(t_info *info, int seq, int n);
 void	print_info(t_philo *philo);
 #endif

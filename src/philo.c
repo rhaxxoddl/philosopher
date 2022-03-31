@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 21:51:39 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/03/30 18:51:21 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/03/31 21:12:55 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,19 @@ void	*even_philo(void *a)
 	i = 0;
 	while (1)
 	{
-		even_eat(philo->info, philo->philo_seq);
+		routine(philo);
+		if (check_die(philo) == 0)
+		{
+			print_state(philo->info, philo->philo_seq, 4);
+			return (0);
+		}
 		++i;
 		if (philo->info->req_eat > 0 && i >= philo->info->req_eat)
-			break ;
+		{
+			philo->info->del_philo++;
+			return (0);
+		}
 	}
-	pthread_mutex_lock(philo->info->m[1]);
-	philo->info->del_philo++;
-	printf("del_philo : %d\n", philo->info->del_philo);
-	pthread_mutex_unlock(philo->info->m[1]);
 	return (0);
 }
 
@@ -42,20 +46,15 @@ void	*odd_philo(void *a)
 	i = 0;
 	while (1)
 	{
-		odd_eat(philo->info, philo->philo_seq);
+		routine(philo);
+		if (check_die(philo) == 0)
+			return (0);
 		++i;
 		if (philo->info->req_eat > 0 && i >= philo->info->req_eat)
-			break ;
+		{
+			philo->info->del_philo++;
+			return (0);
+		}
 	}
-	pthread_mutex_lock(philo->info->m[1]);
-	philo->info->del_philo++;
-	printf("del_philo : %d\n", philo->info->del_philo);
-	pthread_mutex_unlock(philo->info->m[1]);
 	return (0);
 }
-
-// void	print_info(t_philo *philo)
-// {
-// 	printf("philo_seq : %d\n", philo->philo_seq);
-// 	printf("fork : %d\n", philo->info->fork);
-// }

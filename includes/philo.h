@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:35:28 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/03/30 18:40:19 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/03/31 21:08:59 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,37 +38,41 @@ typedef struct s_philo
 {
 	int				philo_seq;
 	int				num_eat;
-	// int				last_eat;
+	long			last_eat;
 	t_info			*info;
 }				t_philo;
 
 // action.c
-int		routine(t_info *info, int seq);
-int		even_eat(t_info *info, int seq);
-int		odd_eat(t_info *info, int seq);
+int		routine(t_philo *philo);
+int		even_eat(t_philo *philo);
+int		odd_eat(t_philo *philo);
 void	sleep_and_think(t_info *info, int seq);
+int		check_die(t_philo *philo);
 // create.c
 int		create_philo(t_info *info);
 t_philo	**init_philo(t_info *info);
 // error.c
-void	p_error(char *error_message, t_info *info);
-void	free_all(t_info *info);
+void	p_error(char *error_message, t_info *info, t_philo **philo);
+void	free_info(t_info info);
 int		free_t_id(pthread_t **t_id);
 int		free_t_philo(t_philo **philo);
 // fork.c
 int		take_fork_l(t_info *info, int seq);
-int		take_fork_r(t_info *info, int seq);
+int		take_fork_r(t_philo *philo);
 int		drop_fork_l(t_info *info, int seq);
 int		drop_fork_r(t_info *info, int seq);
 // parsing.c
 int		parsing(int argc, char *argv[], t_info *info);
-long	get_time();
 pthread_t	**init_t_id(int num_philo);
-int		check_isnum(int argc, char *argv[]);
 void	init_info(int argc, t_info *info);
 int		init_mutex(t_info *info);
 // philo.c
-void	*even_philo(void *a);
-void	*odd_philo(void *a);
-void	print_info(t_philo *philo);
+void		*even_philo(void *a);
+void		*odd_philo(void *a);
+// util.c
+long	get_time();
+int		check_isnum(int argc, char *argv[]);
+void	ft_usleep(useconds_t t);
+void	philo_exit(t_info *info);
+void	print_state(t_info *info, int seq, int state);
 #endif

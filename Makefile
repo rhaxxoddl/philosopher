@@ -18,7 +18,8 @@ SRCS		=	./src/main.c\
 				./src/create.c\
 				./src/philo.c\
 				./src/fork.c\
-				./src/action.c
+				./src/action.c\
+				./src/util.c
 SRCS_DIR	=	./src
 OBJS		=	$(SRCS:.c=.o)
 ARFS		=	$(LIB_DIR)/Libft.a

@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:19:53 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/03/30 18:39:29 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/03/31 20:42:26 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	parsing(int argc, char *argv[], t_info *info)
 		return (0);
 	init_info(argc, info);
 	info->start_time = get_time();
-	printf("start time : %ld\n", info->start_time);
+	if (info->start_time < 0)
+		return (0);
 	info->num_philo = ft_atoi(argv[1]);
 	info->time_die = ft_atoi(argv[2]);
 	info->time_eat = ft_atoi(argv[3]);
@@ -29,20 +30,11 @@ int	parsing(int argc, char *argv[], t_info *info)
 		info->req_eat = -1;
 	info->fork = (int *)ft_calloc((info->num_philo) + 1, sizeof(int));
 	if (init_mutex(info) == 0)
-		p_error("Error\n: Failed init mutex", info);
+		p_error("Error\n: Failed init mutex", info, 0);
 	info->t_id = init_t_id(info->num_philo);
 	if (info->t_id == 0)
-		p_error("Error\n: Failed allocate t_pid", info);
+		p_error("Error\n: Failed allocate t_pid", info, 0);
 	return (1);
-}
-
-long	get_time()
-{
-	struct timeval tv;
-
-	if (gettimeofday(&tv, NULL) == -1)
-		return (-1);
-	return (tv.tv_usec);
 }
 
 pthread_t	**init_t_id(int num_philo)
@@ -52,7 +44,7 @@ pthread_t	**init_t_id(int num_philo)
 
 	t_id = 0;
 	i = -1;
-	t_id = (pthread_t **)ft_calloc(num_philo, sizeof(pthread_t *));
+	t_id = (pthread_t **)ft_calloc(num_philo + 1, sizeof(pthread_t *));
 	if (t_id == 0)
 		return (0);
 	while (++i < num_philo)
@@ -65,24 +57,6 @@ pthread_t	**init_t_id(int num_philo)
 		}
 	}
 	return (t_id);
-}
-
-int	check_isnum(int argc, char *argv[])
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (++i < argc)
-	{
-		j = -1;
-		while (++j < (int)ft_strlen(argv[i]))
-		{
-			if (ft_isdigit(argv[i][j]) == 0)
-				return (0);
-		}
-	}
-	return (1);
 }
 
 void	init_info(int argc, t_info *info)

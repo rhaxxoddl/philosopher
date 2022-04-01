@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:19:53 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/03/31 20:42:26 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/01 16:55:20 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,24 +80,15 @@ int		init_mutex(t_info *info)
 	int	i;
 
 	i = -1;
-	info->m = (pthread_mutex_t **)ft_calloc(info->num_philo + 1, sizeof(pthread_mutex_t *));
+	info->m = (pthread_mutex_t *)ft_calloc(info->num_philo + 1, sizeof(pthread_mutex_t));
 	if (info->m == 0)
 		return (0);
 	while (++i <= info->num_philo)
 	{
-		info->m[i] = (pthread_mutex_t *)ft_calloc(1, sizeof(pthread_mutex_t));
-		if (info->m[i] == 0)
-		{
-			while (--i > 0)
-				free(info->m[i]);
-		}
-	}
-	while (++i <= info->num_philo)
-	{
-		if ((status = pthread_mutex_init(info->m[i], NULL)) != 0)
+		if ((status = pthread_mutex_init(&(info->m[i]), NULL)) != 0)
 		{
 			while (--i >= 0)
-				pthread_mutex_destroy(info->m[i]);
+				pthread_mutex_destroy(&(info->m[i]));
 			return (0);
 		}
 	}

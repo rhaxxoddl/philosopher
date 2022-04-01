@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 19:52:43 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/03/31 20:37:45 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/01 17:08:42 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ int main(int argc, char *argv[])
 		return (0);
 	}
 	create_philo(&info);
-	free_info(info);
+	free_info(&info);
 	return (0);
 }

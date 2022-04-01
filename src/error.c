@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 22:13:59 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/03/31 20:42:14 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/01 16:56:28 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 void	p_error(char *error_message, t_info *info, t_philo **philo)
 {
-	free_info(*info);
+	free_info(info);
 	free_t_philo(philo);
 	printf("%s\n", error_message);
 	exit(1);
 }
 
-void	free_info(t_info info)
+void	free_info(t_info *info)
 {
 	int	i;
 
 	i = -1;
-	free_t_id(info.t_id);
-	if (info.m != 0)
+	free_t_id(info->t_id);
+	if (info->m != 0)
 	{
-		while (info.m[++i] != 0)
-			pthread_mutex_destroy(info.m[i]);
-		free(info.m);
+		while (++i <= info->num_philo)
+			pthread_mutex_destroy(&(info->m[i]));
+		free(info->m);
 	}
 }
 

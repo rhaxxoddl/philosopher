@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 21:55:41 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/03/31 20:37:09 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/01 17:15:14 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,15 @@ int	create_philo(t_info *info)
 	t_philo **philo;
 
 	status = 0;
-	i = -1;
+	i = 0;
 	philo = 0;
 	philo = init_philo(info);
 	if (philo == 0)
 		return (0);
+	status = pthread_create(info->t_id[i], NULL, check_die, (void *)philo);
+	if (status < 0)
+		p_error("Error\n: Failed create thread", info, philo);
+		
 	while (++i < info->num_philo)
 	{
 		if (i % 2 == 1)
@@ -71,4 +75,24 @@ t_philo	**init_philo(t_info *info)
 		philo[i]->num_eat = info->req_eat;
 	}
 	return (philo);
+}
+
+void	*check_die(t_philo **philo)
+{
+	int	i;
+	while (1)
+	{
+		i = 1;
+		while (i <= philo[i]->info->num_philo)
+		{
+			if ((get_time() - philo[i]->last_eat) > philo[i]->info->time_die)
+			{
+				print_state(philo[i]->info, philo[i]->philo_seq, 4);
+				philo[i]->info->del_philo++;
+				return (0);
+			}
+			i++;
+		}
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:35:28 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/03/31 21:08:59 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/01 17:00:21 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_info
 	int				req_eat;
 	int				*fork;
 	int				del_philo;
-	pthread_mutex_t	**m;
+	pthread_mutex_t	*m;
 	pthread_t		**t_id;
 }				t_info;
 
@@ -47,20 +47,22 @@ int		routine(t_philo *philo);
 int		even_eat(t_philo *philo);
 int		odd_eat(t_philo *philo);
 void	sleep_and_think(t_info *info, int seq);
-int		check_die(t_philo *philo);
+
 // create.c
 int		create_philo(t_info *info);
 t_philo	**init_philo(t_info *info);
+void	*check_die(t_philo **philo);
+
 // error.c
 void	p_error(char *error_message, t_info *info, t_philo **philo);
-void	free_info(t_info info);
+void	free_info(t_info *info);
 int		free_t_id(pthread_t **t_id);
 int		free_t_philo(t_philo **philo);
 // fork.c
-int		take_fork_l(t_info *info, int seq);
+int		take_fork_l(t_philo *philo);
 int		take_fork_r(t_philo *philo);
-int		drop_fork_l(t_info *info, int seq);
-int		drop_fork_r(t_info *info, int seq);
+int		drop_fork_l(t_philo *philo);
+int		drop_fork_r(t_philo *philo);
 // parsing.c
 int		parsing(int argc, char *argv[], t_info *info);
 pthread_t	**init_t_id(int num_philo);

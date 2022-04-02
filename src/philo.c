@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 21:51:39 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/03/31 21:12:55 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/02 21:27:11 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ void	*even_philo(void *a)
 	while (1)
 	{
 		routine(philo);
-		if (check_die(philo) == 0)
-		{
-			print_state(philo->info, philo->philo_seq, 4);
-			return (0);
-		}
 		++i;
 		if (philo->info->req_eat > 0 && i >= philo->info->req_eat)
 		{
@@ -47,8 +42,6 @@ void	*odd_philo(void *a)
 	while (1)
 	{
 		routine(philo);
-		if (check_die(philo) == 0)
-			return (0);
 		++i;
 		if (philo->info->req_eat > 0 && i >= philo->info->req_eat)
 		{

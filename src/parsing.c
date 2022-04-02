@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:19:53 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/01 16:55:20 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/02 17:23:37 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,16 @@ int	parsing(int argc, char *argv[], t_info *info)
 	return (1);
 }
 
-pthread_t	**init_t_id(int num_philo)
+pthread_t	*init_t_id(int num_philo)
 {
-	pthread_t	**t_id;
+	pthread_t	*t_id;
 	int			i;
 
 	t_id = 0;
 	i = -1;
-	t_id = (pthread_t **)ft_calloc(num_philo + 1, sizeof(pthread_t *));
+	t_id = (pthread_t *)ft_calloc(num_philo + 1, sizeof(pthread_t));
 	if (t_id == 0)
 		return (0);
-	while (++i < num_philo)
-	{
-		t_id[i] = (pthread_t *)ft_calloc(1, sizeof(pthread_t));
-		if (t_id[i] == 0)
-		{
-			free_t_id(t_id);
-			return (0);
-		}
-	}
 	return (t_id);
 }
 

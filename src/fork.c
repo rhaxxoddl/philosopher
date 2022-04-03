@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:33:50 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/02 21:04:37 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/03 12:02:23 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	take_fork_l(t_philo *philo)
 {
 	if (pthread_mutex_lock(&(philo->info->m[philo->philo_seq])) == -1)
 		return (0);
-	print_state(philo->info, philo->philo_seq, 0);
+	print_state(philo, 0);
 	philo->info->fork[philo->philo_seq] = philo->philo_seq;
 	return (1);
 }
@@ -27,7 +27,7 @@ int	take_fork_r(t_philo *philo)
 	{
 		if (pthread_mutex_lock(&(philo->info->m[philo->info->num_philo])) == -1)
 			return (0);
-		print_state(philo->info, philo->philo_seq, 0);
+		print_state(philo, 0);
 		philo->info->fork[philo->info->num_philo] = philo->philo_seq;
 		return (1);
 	}
@@ -35,7 +35,7 @@ int	take_fork_r(t_philo *philo)
 	{
 		if (pthread_mutex_lock(&(philo->info->m[philo->philo_seq - 1])) == -1)
 			return (0);
-		print_state(philo->info, philo->philo_seq, 0);
+		print_state(philo, 0);
 		philo->info->fork[philo->philo_seq - 1] = philo->philo_seq;
 		return (1);
 	}

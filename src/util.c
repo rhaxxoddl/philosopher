@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:03:14 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/01 17:02:55 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/03 11:59:25 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_usleep(useconds_t t)
 	start_sleep = get_time();
 	while (get_time() - start_sleep < t)
 	{
-		usleep(300);
+		usleep(100);
 	}
 }
 
@@ -56,16 +56,16 @@ void	philo_exit(t_info *info)
 	exit(0);
 }
 
-void	print_state(t_info *info, int seq, int state)
+void	print_state(t_philo *philo, int state)
 {
 	if (state == 0)
-		printf("%ld %d has taken a fork\n", get_time() - info->start_time, seq);
+		printf("%ldms %d has taken a fork\n", get_time() - philo->info->start_time, philo->philo_seq);
 	else if (state == 1)
-		printf("%ld %d is eating\n", get_time() - info->start_time, seq);
+		printf("%ldms %d is eating\n", get_time() - philo->info->start_time, philo->philo_seq);
 	else if (state == 2)
-		printf("%ld %d is sleeping\n", get_time() - info->start_time, seq);
+		printf("%ldms %d is sleeping\n", get_time() - philo->info->start_time, philo->philo_seq);
 	else if (state == 3)
-		printf("%ld %d is thinking\n", get_time() - info->start_time, seq);
+		printf("%ldms %d is thinking\n", get_time() - philo->info->start_time, philo->philo_seq);
 	else if (state == 4)
-		printf("%ld %d is died\n", get_time() - info->start_time, seq);
+		printf("%ldms %d is died\n", get_time() - philo->info->start_time, philo->philo_seq);
 }

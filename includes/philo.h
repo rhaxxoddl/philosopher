@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:35:28 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/02 17:25:50 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/03 12:00:38 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_philo
 int		routine(t_philo *philo);
 int		even_eat(t_philo *philo);
 int		odd_eat(t_philo *philo);
-void	sleep_and_think(t_info *info, int seq);
+void	sleep_and_think(t_philo *philo);
 
 // create.c
 int		create_philo(t_info *info);
@@ -76,5 +76,5 @@ long	get_time();
 int		check_isnum(int argc, char *argv[]);
 void	ft_usleep(useconds_t t);
 void	philo_exit(t_info *info);
-void	print_state(t_info *info, int seq, int state);
+void	print_state(t_philo *philo, int state);
 #endif

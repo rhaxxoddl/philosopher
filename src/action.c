@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 13:30:07 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/02 21:25:15 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/03 12:00:20 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,13 @@ int	routine(t_philo *philo)
 	{
 		if (even_eat(philo) == 0)
 			return (0);
-		sleep_and_think(philo->info, philo->philo_seq);
 	}
 	else
 	{
 		if (odd_eat(philo) == 0)
 			return (0);
-		sleep_and_think(philo->info, philo->philo_seq);
 	}
+	sleep_and_think(philo);
 	return (1);
 }
 
@@ -37,7 +36,7 @@ int	even_eat(t_philo *philo)
 		return (0);
 	philo->last_eat = get_time();
 	philo->num_eat++;
-	print_state(philo->info, philo->philo_seq, 1);
+	print_state(philo, 1);
 	ft_usleep(philo->info->time_eat);
 	if (drop_fork_l(philo) == 0)
 		return (0);
@@ -54,7 +53,7 @@ int	odd_eat(t_philo *philo)
 		return (0);
 	philo->last_eat = get_time();
 	philo->num_eat++;
-	print_state(philo->info, philo->philo_seq, 1);
+	print_state(philo, 1);
 	ft_usleep(philo->info->time_eat);
 	if (drop_fork_r(philo) == 0)
 		return (0);
@@ -63,9 +62,9 @@ int	odd_eat(t_philo *philo)
 	return (1);
 }
 
-void	sleep_and_think(t_info *info, int seq)
+void	sleep_and_think(t_philo *philo)
 {
-	print_state(info, seq, 2);
-	ft_usleep(info->time_sleep);
-	print_state(info, seq, 3);
+	print_state(philo, 2);
+	ft_usleep(philo->info->time_sleep);
+	print_state(philo,3);
 }

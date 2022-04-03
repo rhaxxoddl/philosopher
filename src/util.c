@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:03:14 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/03 12:52:00 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/03 16:57:27 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	philo_exit(t_info *info)
 
 void	print_state(t_philo *philo, int state)
 {
+	pthread_mutex_lock(&(philo->info->m[0]));
 	if (state == 0)
 		printf("%ldms %d has taken a fork\n",
 			get_time() - philo->info->start_time, philo->philo_seq);
@@ -77,4 +78,5 @@ void	print_state(t_philo *philo, int state)
 	else if (state == 4)
 		printf("%ldms %d is died\n",
 			get_time() - philo->info->start_time, philo->philo_seq);
+	pthread_mutex_unlock(&(philo->info->m[0]));
 }

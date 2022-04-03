@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 19:52:43 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/03 12:53:55 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/03 13:02:19 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char *argv[])
 		perror("ERROR\nImproper parameter");
 		return (0);
 	}
-	create_philo(&info);
+	start_philo(&info);
 	free_info(&info);
 	return (0);
 }

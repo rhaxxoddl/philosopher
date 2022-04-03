@@ -6,12 +6,12 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:35:28 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/03 12:49:49 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/03 13:11:37 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
-#define PHILO_H
+# define PHILO_H
 
 # include <pthread.h>
 # include <stdlib.h>
@@ -43,38 +43,39 @@ typedef struct s_philo
 }				t_philo;
 
 // action.c
-int		routine(t_philo *philo);
-int		even_eat(t_philo *philo);
-int		odd_eat(t_philo *philo);
-void	sleep_and_think(t_philo *philo);
+int			routine(t_philo *philo);
+int			odd_eat(t_philo *philo);
+int			even_eat(t_philo *philo);
+void		sleep_and_think(t_philo *philo);
 
 // create.c
-int		create_philo(t_info *info);
-t_philo	*init_philo(t_info *info);
-void	*check_die(void *p);
+int			start_philo(t_info *info);
+t_philo		*create_philo(t_info	*info);
+t_philo		*init_philo(t_info *info);
+void		*check_die(void *p);
 
 // error.c
-void	p_error(char *error_message, t_info *info, t_philo *philo);
-void	free_info(t_info *info);
-int		free_t_id(pthread_t **t_id);
-int		free_t_philo(t_philo *philo);
+void		p_error(char *error_message, t_info *info, t_philo *philo);
+void		free_info(t_info *info);
+int			free_t_id(pthread_t **t_id);
+int			free_t_philo(t_philo *philo);
 // fork.c
-int		take_fork_l(t_philo *philo);
-int		take_fork_r(t_philo *philo);
-int		drop_fork_l(t_philo *philo);
-int		drop_fork_r(t_philo *philo);
+int			take_fork_l(t_philo *philo);
+int			take_fork_r(t_philo *philo);
+int			drop_fork_l(t_philo *philo);
+int			drop_fork_r(t_philo *philo);
 // parsing.c
-int		parsing(int argc, char *argv[], t_info *info);
+int			parsing(int argc, char *argv[], t_info *info);
 pthread_t	*init_t_id(int num_philo);
-void	init_info(int argc, t_info *info);
-int		init_mutex(t_info *info);
+void		init_info(int argc, t_info *info);
+int			init_mutex(t_info *info);
 // philo.c
 void		*even_philo(void *a);
 void		*odd_philo(void *a);
 // util.c
-long	get_time(void);
-int		check_isnum(int argc, char *argv[]);
-void	ft_usleep(useconds_t t);
-void	philo_exit(t_info *info);
-void	print_state(t_philo *philo, int state);
+long		get_time(void);
+int			check_isnum(int argc, char *argv[]);
+void		ft_usleep(useconds_t t);
+void		philo_exit(t_info *info);
+void		print_state(t_philo *philo, int state);
 #endif

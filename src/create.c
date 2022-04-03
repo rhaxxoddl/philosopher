@@ -6,13 +6,13 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 21:55:41 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/03 12:58:53 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/03 13:09:51 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	create_philo(t_info *info)
+int	start_philo(t_info *info)
 {
 	int		status;
 	int		i;
@@ -20,24 +20,7 @@ int	create_philo(t_info *info)
 
 	status = 0;
 	i = 0;
-	philo = 0;
-	philo = init_philo(info);
-	if (philo == 0)
-		return (0);
-	while (++i <= info->num_philo)
-	{
-		if (i % 2 == 1)
-			status = pthread_create(&(info->t_id[i]), NULL,
-					even_philo, (void *)&philo[i]);
-		else
-			status = pthread_create(&(info->t_id[i]), NULL,
-					odd_philo, (void *)&philo[i]);
-		if (status < 0)
-			p_error("Error\n: Failed create thread", info, philo);
-	}
-	status = pthread_create(&(info->t_id[0]), NULL, check_die, (void *)philo);
-	if (status < 0)
-		p_error("Error\n: Failed create thread", info, philo);
+	philo = create_philo(info);
 	i = -1;
 	while (++i < info->num_philo)
 	{
@@ -52,6 +35,33 @@ int	create_philo(t_info *info)
 	}
 	free_t_philo(philo);
 	return (1);
+}
+
+t_philo	*create_philo(t_info	*info)
+{
+	t_philo	*philo;
+	int		status;
+	int		i;
+
+	philo = 0;
+	status = 0;
+	i = 0;
+	philo = init_philo(info);
+	while (++i <= info->num_philo)
+	{
+		if (i % 2 == 1)
+			status = pthread_create(&(info->t_id[i]), NULL,
+					even_philo, (void *)&philo[i]);
+		else
+			status = pthread_create(&(info->t_id[i]), NULL,
+					odd_philo, (void *)&philo[i]);
+		if (status < 0)
+			p_error("Error\n: Failed create thread", info, philo);
+	}
+	status = pthread_create(&(info->t_id[0]), NULL, check_die, (void *)philo);
+	if (status < 0)
+		p_error("Error\n: Failed create thread", info, philo);
+	return (philo);
 }
 
 t_philo	*init_philo(t_info *info)

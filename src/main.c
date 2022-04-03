@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 19:52:43 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/01 17:08:42 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/03 12:53:55 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <errno.h>
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_info	info;
 

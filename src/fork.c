@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 12:33:50 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/03 12:02:23 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/03 12:54:32 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int	drop_fork_r(t_philo *philo)
 	if (philo->philo_seq == 1)
 	{
 		philo->info->fork[philo->info->num_philo] = 0;
-		if (pthread_mutex_unlock(&(philo->info->m[philo->info->num_philo])) == -1)
+		if (pthread_mutex_unlock(&(philo->info->m[philo->info->num_philo]))
+			== -1)
 			return (0);
 		return (1);
 	}
@@ -66,4 +67,3 @@ int	drop_fork_r(t_philo *philo)
 		return (1);
 	}
 }
-

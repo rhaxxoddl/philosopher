@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:35:28 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/03 12:00:38 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/03 12:49:49 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		init_mutex(t_info *info);
 void		*even_philo(void *a);
 void		*odd_philo(void *a);
 // util.c
-long	get_time();
+long	get_time(void);
 int		check_isnum(int argc, char *argv[]);
 void	ft_usleep(useconds_t t);
 void	philo_exit(t_info *info);

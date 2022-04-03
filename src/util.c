@@ -6,15 +6,15 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:03:14 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/03 12:05:35 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/03 12:52:00 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long	get_time()
+long	get_time(void)
 {
-	struct timeval tv;
+	struct timeval	tv;
 
 	if (gettimeofday(&tv, NULL) == -1)
 		return (-1);
@@ -59,17 +59,22 @@ void	philo_exit(t_info *info)
 void	print_state(t_philo *philo, int state)
 {
 	if (state == 0)
-		printf("%ldms %d has taken a fork\n", get_time() - philo->info->start_time, philo->philo_seq);
+		printf("%ldms %d has taken a fork\n",
+			get_time() - philo->info->start_time, philo->philo_seq);
 	else if (state == 1)
 	{
 		philo->last_eat = get_time();
 		philo->num_eat++;
-		printf("%ldms %d is eating\n", philo->last_eat - philo->info->start_time, philo->philo_seq);
+		printf("%ldms %d is eating\n",
+			philo->last_eat - philo->info->start_time, philo->philo_seq);
 	}
 	else if (state == 2)
-		printf("%ldms %d is sleeping\n", get_time() - philo->info->start_time, philo->philo_seq);
+		printf("%ldms %d is sleeping\n",
+			get_time() - philo->info->start_time, philo->philo_seq);
 	else if (state == 3)
-		printf("%ldms %d is thinking\n", get_time() - philo->info->start_time, philo->philo_seq);
+		printf("%ldms %d is thinking\n",
+			get_time() - philo->info->start_time, philo->philo_seq);
 	else if (state == 4)
-		printf("%ldms %d is died\n", get_time() - philo->info->start_time, philo->philo_seq);
+		printf("%ldms %d is died\n",
+			get_time() - philo->info->start_time, philo->philo_seq);
 }

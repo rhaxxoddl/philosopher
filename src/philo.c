@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 21:51:39 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/02 21:27:11 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/03 12:52:21 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	*even_philo(void *a)
 {
 	t_philo	*philo;
-	int	i;
+	int		i;
 
 	philo = a;
 	i = 0;
@@ -35,7 +35,7 @@ void	*even_philo(void *a)
 void	*odd_philo(void *a)
 {
 	t_philo	*philo;
-	int	i;
+	int		i;
 
 	philo = a;
 	i = 0;

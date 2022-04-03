@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 21:55:41 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/03 12:02:17 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/03 12:58:53 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	create_philo(t_info *info)
 {
-	int	status;
-	int	i;
-	t_philo *philo;
+	int		status;
+	int		i;
+	t_philo	*philo;
 
 	status = 0;
 	i = 0;
@@ -27,9 +27,11 @@ int	create_philo(t_info *info)
 	while (++i <= info->num_philo)
 	{
 		if (i % 2 == 1)
-			status = pthread_create(&(info->t_id[i]), NULL, even_philo, (void *)&philo[i]);
+			status = pthread_create(&(info->t_id[i]), NULL,
+					even_philo, (void *)&philo[i]);
 		else
-			status = pthread_create(&(info->t_id[i]), NULL, odd_philo, (void *)&philo[i]);
+			status = pthread_create(&(info->t_id[i]), NULL,
+					odd_philo, (void *)&philo[i]);
 		if (status < 0)
 			p_error("Error\n: Failed create thread", info, philo);
 	}
@@ -45,7 +47,7 @@ int	create_philo(t_info *info)
 	while (info->del_philo != info->num_philo)
 	{
 		if (info->req_eat < 0 && info->del_philo > 0)
-			break;
+			break ;
 		usleep(1);
 	}
 	free_t_philo(philo);
@@ -74,7 +76,7 @@ t_philo	*init_philo(t_info *info)
 void	*check_die(void *p)
 {
 	t_philo	*philo;
-	int	i;
+	int		i;
 
 	philo = p;
 	while (1)

@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 13:30:07 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/03 12:43:30 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/03 12:45:36 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,5 @@ void	sleep_and_think(t_philo *philo)
 {
 	print_state(philo, 2);
 	ft_usleep(philo->info->time_sleep);
-	print_state(philo,3);
+	print_state(philo, 3);
 }

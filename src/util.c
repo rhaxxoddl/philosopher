@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:03:14 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/03 11:59:25 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/03 12:05:35 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,11 @@ void	print_state(t_philo *philo, int state)
 	if (state == 0)
 		printf("%ldms %d has taken a fork\n", get_time() - philo->info->start_time, philo->philo_seq);
 	else if (state == 1)
-		printf("%ldms %d is eating\n", get_time() - philo->info->start_time, philo->philo_seq);
+	{
+		philo->last_eat = get_time();
+		philo->num_eat++;
+		printf("%ldms %d is eating\n", philo->last_eat - philo->info->start_time, philo->philo_seq);
+	}
 	else if (state == 2)
 		printf("%ldms %d is sleeping\n", get_time() - philo->info->start_time, philo->philo_seq);
 	else if (state == 3)

@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 13:30:07 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/03 12:00:20 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/03 12:43:30 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ int	routine(t_philo *philo)
 {
 	if (philo->philo_seq % 2 == 0)
 	{
-		if (even_eat(philo) == 0)
+		if (odd_eat(philo) == 0)
 			return (0);
 	}
 	else
 	{
-		if (odd_eat(philo) == 0)
+		usleep(100);
+		if (even_eat(philo) == 0)
 			return (0);
 	}
 	sleep_and_think(philo);
@@ -34,8 +35,6 @@ int	even_eat(t_philo *philo)
 		return (0);
 	if (take_fork_r(philo) == 0)
 		return (0);
-	philo->last_eat = get_time();
-	philo->num_eat++;
 	print_state(philo, 1);
 	ft_usleep(philo->info->time_eat);
 	if (drop_fork_l(philo) == 0)
@@ -51,8 +50,6 @@ int	odd_eat(t_philo *philo)
 		return (0);
 	if (take_fork_l(philo) == 0)
 		return (0);
-	philo->last_eat = get_time();
-	philo->num_eat++;
 	print_state(philo, 1);
 	ft_usleep(philo->info->time_eat);
 	if (drop_fork_r(philo) == 0)

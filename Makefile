@@ -15,7 +15,7 @@ LDFLAGS		=	-lc
 SRCS		=	./src/main.c\
 				./src/parsing.c\
 				./src/error.c\
-				./src/create.c\
+				./src/start.c\
 				./src/philo.c\
 				./src/fork.c\
 				./src/action.c\

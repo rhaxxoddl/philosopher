@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 13:30:07 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/04 11:00:54 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/04 11:05:06 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	*routine(void *a)
 	while (1)
 	{
 		sleep_and_think(philo);
-	 	if (philo->info->req_eat >= 0 &&
-		 	philo->num_eat == philo->info->req_eat)
+		if (philo->info->req_eat >= 0
+			&& philo->num_eat == philo->info->req_eat)
 			philo->info->del_philo++;
 		if (philo->philo_seq % 2 == 0)
 		{
@@ -37,23 +37,6 @@ void	*routine(void *a)
 	}
 	return (0);
 }
-
-// int	routine(t_philo *philo)
-// {
-// 	if (philo->philo_seq % 2 == 0)
-// 	{
-// 		if (even_eat(philo) == 0)
-// 			return (0);
-// 	}
-// 	else
-// 	{
-// 		usleep(100);
-// 		if (odd_eat(philo) == 0)
-// 			return (0);
-// 	}
-// 	sleep_and_think(philo);
-// 	return (1);
-// }
 
 int	odd_eat(t_philo *philo)
 {

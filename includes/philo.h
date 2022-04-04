@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:35:28 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/04 10:18:55 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/04 11:05:51 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct s_philo
 }				t_philo;
 
 // action.c
-// int			routine(t_philo *philo);
 void		*routine(void *a);
 int			odd_eat(t_philo *philo);
 int			even_eat(t_philo *philo);
@@ -70,8 +69,6 @@ int			parsing(int argc, char *argv[], t_info *info);
 pthread_t	*init_t_id(int num_philo);
 void		init_info(int argc, t_info *info);
 int			init_mutex(t_info *info);
-// philo.c
-void		*func_philo(void *a);
 // util.c
 long		get_time(void);
 int			check_isnum(int argc, char *argv[]);

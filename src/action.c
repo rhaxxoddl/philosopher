@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 13:30:07 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/04 11:05:06 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/05 11:19:23 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	*routine(void *a)
 	philo = a;
 	while (1)
 	{
-		sleep_and_think(philo);
 		if (philo->info->req_eat >= 0
 			&& philo->num_eat == philo->info->req_eat)
 			philo->info->del_philo++;
@@ -34,6 +33,7 @@ void	*routine(void *a)
 			if (odd_eat(philo) == 0)
 				perror("Failed even_eat!");
 		}
+		sleep_and_think(philo);
 	}
 	return (0);
 }

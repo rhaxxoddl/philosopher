@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:35:28 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/04 11:05:51 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/05 10:30:16 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,19 @@ void		p_error(char *error_message, t_info *info, t_philo *philo);
 void		free_info(t_info *info);
 int			free_t_id(pthread_t **t_id);
 int			free_t_philo(t_philo *philo);
+
 // fork.c
 int			take_fork_l(t_philo *philo);
 int			take_fork_r(t_philo *philo);
 int			drop_fork_l(t_philo *philo);
 int			drop_fork_r(t_philo *philo);
+
 // parsing.c
 int			parsing(int argc, char *argv[], t_info *info);
 pthread_t	*init_t_id(int num_philo);
 void		init_info(int argc, t_info *info);
 int			init_mutex(t_info *info);
+
 // util.c
 long		get_time(void);
 int			check_isnum(int argc, char *argv[]);

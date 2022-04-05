@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 22:13:59 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/02 17:27:23 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/05 10:29:40 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void	free_info(t_info *info)
 	int	i;
 
 	i = -1;
-	free(info->t_id);
 	if (info->m != 0)
 	{
 		while (++i <= info->num_philo)
 			pthread_mutex_destroy(&(info->m[i]));
 		free(info->m);
 	}
+	free(info->t_id);
 }
 
 int	free_t_philo(t_philo *philo)

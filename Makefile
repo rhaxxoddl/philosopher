@@ -12,14 +12,13 @@ CFLAGS		=	-Wall -Wextra -Werror
 DEBUGFLAG	= -fsanitize=address -g3
 LDFLAGS		=	-lc
 
-SRCS		=	./src/main.c\
-				./src/parsing.c\
-				./src/error.c\
-				./src/start.c\
-				./src/philo.c\
-				./src/fork.c\
-				./src/action.c\
-				./src/util.c
+SRCS		=	$(SRCS_DIR)/main.c\
+				$(SRCS_DIR)/parsing.c\
+				$(SRCS_DIR)/error.c\
+				$(SRCS_DIR)/start.c\
+				$(SRCS_DIR)/fork.c\
+				$(SRCS_DIR)/action.c\
+				$(SRCS_DIR)/util.c
 SRCS_DIR	=	./src
 OBJS		=	$(SRCS:.c=.o)
 ARFS		=	$(LIB_DIR)/Libft.a

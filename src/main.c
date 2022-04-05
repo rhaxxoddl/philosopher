@@ -6,12 +6,11 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 19:52:43 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/04 10:59:10 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/05 10:29:11 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <unistd.h>
 #include <errno.h>
 
 int	main(int argc, char *argv[])

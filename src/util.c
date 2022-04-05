@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:03:14 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/03 16:57:27 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/05 12:48:13 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,27 +56,36 @@ void	philo_exit(t_info *info)
 	exit(0);
 }
 
-void	print_state(t_philo *philo, int state)
+void	print_state(t_philo *philo, int state, long time)
 {
 	pthread_mutex_lock(&(philo->info->m[0]));
+	long	current_time;
+
+	if (time != 0)
+		current_time = time;
+	else
+		current_time = get_time();
+		// printf("get_time : %ld\nstart_time : %ld\n", current_time, philo->info->start_time);
 	if (state == 0)
 		printf("%ldms %d has taken a fork\n",
-			get_time() - philo->info->start_time, philo->philo_seq);
+			current_time - philo->info->start_time, philo->philo_seq);
 	else if (state == 1)
 	{
-		philo->last_eat = get_time();
+		philo->last_eat = current_time;
 		philo->num_eat++;
 		printf("%ldms %d is eating\n",
 			philo->last_eat - philo->info->start_time, philo->philo_seq);
 	}
 	else if (state == 2)
 		printf("%ldms %d is sleeping\n",
-			get_time() - philo->info->start_time, philo->philo_seq);
+			current_time - philo->info->start_time, philo->philo_seq);
 	else if (state == 3)
 		printf("%ldms %d is thinking\n",
-			get_time() - philo->info->start_time, philo->philo_seq);
+			current_time - philo->info->start_time, philo->philo_seq);
 	else if (state == 4)
+	{
 		printf("%ldms %d is died\n",
-			get_time() - philo->info->start_time, philo->philo_seq);
+			current_time - philo->info->start_time, philo->philo_seq);
+	}
 	pthread_mutex_unlock(&(philo->info->m[0]));
 }

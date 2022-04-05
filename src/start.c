@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 21:55:41 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/04 10:59:14 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/05 13:00:25 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	start_philo(t_info *info)
 			break ;
 		usleep(1);
 	}
+	// usleep(1000);
 	free_t_philo(philo);
 	return (1);
 }
@@ -83,6 +84,7 @@ void	*check_die(void *p)
 {
 	t_philo	*philo;
 	int		i;
+	long	time;
 
 	philo = p;
 	while (1)
@@ -90,9 +92,12 @@ void	*check_die(void *p)
 		i = 1;
 		while (i <= philo[0].info->num_philo)
 		{
-			if ((get_time() - philo[i].last_eat) > philo[i].info->time_die)
+			time = get_time();
+				printf("info : %p\n", philo->info);
+		printf("time : %ld\nstart_time : %ld\n", time, philo->info->start_time);
+			if ((time - philo[i].last_eat) > philo[i].info->time_die)
 			{
-				print_state(&(philo[i]), 4);
+				print_state(&(philo[i]), 4, time);
 				philo[i].info->del_philo = philo[i].info->num_philo;
 				return (0);
 			}

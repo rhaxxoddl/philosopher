@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:35:28 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/05 10:30:16 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/05 12:48:05 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,6 @@ long		get_time(void);
 int			check_isnum(int argc, char *argv[]);
 void		ft_usleep(useconds_t t);
 void		philo_exit(t_info *info);
-void		print_state(t_philo *philo, int state);
+void		print_state(t_philo *philo, int state, long time);
+// void		print_state(t_philo *philo, int state);
 #endif

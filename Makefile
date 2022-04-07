@@ -15,7 +15,6 @@ LDFLAGS		=	-lc
 SRCS		=	./src/main.c\
 				./src/parsing.c\
 				./src/error.c\
-				./src/create.c\
 				./src/philo.c\
 				./src/fork.c\
 				./src/action.c\
@@ -23,7 +22,7 @@ SRCS		=	./src/main.c\
 SRCS_DIR	=	./src
 OBJS		=	$(SRCS:.c=.o)
 ARFS		=	$(LIB_DIR)/Libft.a
-MAKEFLAGS	+=	--silent
+# MAKEFLAGS	+=	--silent
 
 all		:	$(TARGET)
 

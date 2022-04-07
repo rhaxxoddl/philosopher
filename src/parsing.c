@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:19:53 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/03 12:55:16 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/07 08:57:07 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	init_info(int argc, t_info *info)
 	info->fork = 0;
 	info->m = 0;
 	info->t_id = 0;
-	info->del_philo = 0;
+	info->is_end = 0;
 }
 
 int	init_mutex(t_info *info)

@@ -1,53 +1,87 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   create.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/27 21:51:39 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/03 12:52:21 by sanjeon          ###   ########.fr       */
+/*   Created: 2022/03/27 21:55:41 by sanjeon           #+#    #+#             */
+/*   Updated: 2022/04/07 09:28:48 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*even_philo(void *a)
+int	start_philo(t_info *info, t_philo *philo)
 {
-	t_philo	*philo;
 	int		i;
+	int		full_philo;
+	long	current_time;
 
-	philo = a;
-	i = 0;
 	while (1)
 	{
-		routine(philo);
-		++i;
-		if (philo->info->req_eat > 0 && i >= philo->info->req_eat)
+		i = 0;
+		full_philo = 0;
+		current_time = 0;
+		while (++i <= info->num_philo)
 		{
-			philo->info->del_philo++;
-			return (0);
+			if (info->req_eat >= 0 && philo[i].num_eat >= info->req_eat)
+				full_philo++;
+			current_time = get_time();
+			if ((current_time - philo[i].last_eat) > philo[i].info->time_die)
+			{
+				philo[i].info->is_end = 1;
+				print_state(&(philo[i]), 4, current_time);
+				return (1);
+			}
 		}
+		if (full_philo >= info->num_philo)
+			break ;
 	}
-	return (0);
+	return (1);
 }
 
-void	*odd_philo(void *a)
+t_philo	*create_philo(t_info	*info)
+{
+	t_philo	*philo;
+	int		status;
+	int		i;
+
+	philo = 0;
+	status = 0;
+	i = 0;
+	philo = init_philo(info);
+	while (++i <= info->num_philo)
+	{
+		status = pthread_create(&(info->t_id[i]), NULL,
+				routine, (void *)&philo[i]);
+		if (status < 0)
+			p_error("Error\n: Failed create thread", info, philo);
+	}
+	i = 0;
+	while (++i < info->num_philo)
+	{
+		if (pthread_detach(info->t_id[i]) != 0)
+			p_error("Error\n: Failed detach thread", info, philo);
+	}
+	return (philo);
+}
+
+t_philo	*init_philo(t_info *info)
 {
 	t_philo	*philo;
 	int		i;
 
-	philo = a;
-	i = 0;
-	while (1)
+	philo = (t_philo *)ft_calloc(info->num_philo + 2, sizeof(t_philo));
+	if (philo == 0)
+		return (0);
+	i = -1;
+	while (++i <= info->num_philo)
 	{
-		routine(philo);
-		++i;
-		if (philo->info->req_eat > 0 && i >= philo->info->req_eat)
-		{
-			philo->info->del_philo++;
-			return (0);
-		}
+		philo[i].info = info;
+		philo[i].philo_seq = i;
+		philo[i].num_eat = 0;
+		philo[i].last_eat = info->start_time;
 	}
-	return (0);
+	return (philo);
 }

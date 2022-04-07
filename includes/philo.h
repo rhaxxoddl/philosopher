@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:35:28 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/03 13:11:37 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/07 09:09:37 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_info
 	int				time_sleep;
 	int				req_eat;
 	int				*fork;
-	int				del_philo;
+	int				is_end;
 	pthread_mutex_t	*m;
 	pthread_t		*t_id;
 }				t_info;
@@ -43,13 +43,13 @@ typedef struct s_philo
 }				t_philo;
 
 // action.c
-int			routine(t_philo *philo);
+void		*routine(void *a);
 int			odd_eat(t_philo *philo);
 int			even_eat(t_philo *philo);
 void		sleep_and_think(t_philo *philo);
 
 // create.c
-int			start_philo(t_info *info);
+int			start_philo(t_info *info, t_philo *philo);
 t_philo		*create_philo(t_info	*info);
 t_philo		*init_philo(t_info *info);
 void		*check_die(void *p);
@@ -70,12 +70,12 @@ pthread_t	*init_t_id(int num_philo);
 void		init_info(int argc, t_info *info);
 int			init_mutex(t_info *info);
 // philo.c
-void		*even_philo(void *a);
-void		*odd_philo(void *a);
+// void		*even_philo(void *a);
+// void		*odd_philo(void *a);
 // util.c
 long		get_time(void);
 int			check_isnum(int argc, char *argv[]);
 void		ft_usleep(useconds_t t);
 void		philo_exit(t_info *info);
-void		print_state(t_philo *philo, int state);
+void		print_state(t_philo *philo, int state, long current_time);
 #endif

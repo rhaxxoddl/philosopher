@@ -1,6 +1,7 @@
 {
   "files.associations": {
     "pthread.h": "c",
-    "locale": "c"
+    "locale": "c",
+    "philo.h": "c"
   }
 }

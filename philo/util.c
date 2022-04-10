@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:03:14 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/07 09:29:08 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/10 16:38:42 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,39 +46,35 @@ void	ft_usleep(useconds_t t)
 	start_sleep = get_time();
 	while (get_time() - start_sleep < t)
 	{
-		usleep(100);
+		usleep(300);
 	}
 }
 
-void	philo_exit(t_info *info)
+void	print_state(t_philo *philo, int state)
 {
-	free_info(info);
-	exit(0);
-}
-
-void	print_state(t_philo *philo, int state, long current_time)
-{
-	pthread_mutex_lock(&(philo->info->m[0]));
-	if (state == 0)
+	if (philo->info->is_end == 0 && pthread_mutex_lock(&(philo->info->m[0])))
+		return ;
+	if (philo->info->is_end == 0 && state == 0)
 		printf("%ldms %d has taken a fork\n",
 			get_time() - philo->info->start_time, philo->philo_seq);
-	else if (state == 1)
+	else if (philo->info->is_end == 0 && state == 1)
 	{
 		philo->last_eat = get_time();
 		philo->num_eat++;
 		printf("%ldms %d is eating\n",
 			philo->last_eat - philo->info->start_time, philo->philo_seq);
 	}
-	else if (state == 2)
+	else if (philo->info->is_end == 0 && state == 2)
 		printf("%ldms %d is sleeping\n",
 			get_time() - philo->info->start_time, philo->philo_seq);
-	else if (state == 3)
+	else if (philo->info->is_end == 0 && state == 3)
 		printf("%ldms %d is thinking\n",
 			get_time() - philo->info->start_time, philo->philo_seq);
-	else if (state == 4)
+	else if (philo->info->is_end == 0 && state == 4)
 	{
+		philo->info->is_end = 1;
 		printf("%ldms %d is died\n",
-			current_time - philo->info->start_time, philo->philo_seq);
+			get_time() - philo->info->start_time, philo->philo_seq);
 		return ;
 	}
 	pthread_mutex_unlock(&(philo->info->m[0]));

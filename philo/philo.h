@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:35:28 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/07 09:36:18 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/10 17:16:32 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdio.h>
 # include <sys/time.h>
 # include <unistd.h>
-# include "libft.h"
 
 typedef struct s_info
 {
@@ -48,17 +47,11 @@ int			odd_eat(t_philo *philo);
 int			even_eat(t_philo *philo);
 void		sleep_and_think(t_philo *philo);
 
-// create.c
-int			start_philo(t_info *info, t_philo *philo);
-t_philo		*create_philo(t_info	*info);
-t_philo		*init_philo(t_info *info);
-void		*check_die(void *p);
-
 // error.c
-void		p_error(char *error_message, t_info *info, t_philo *philo);
+int			ft_exit(t_info *info, t_philo *philo);
 void		free_info(t_info *info);
 int			free_t_id(pthread_t **t_id);
-int			free_t_philo(t_philo *philo);
+void		all_mutex_destroy(t_info *info);
 
 // fork.c
 int			take_fork_l(t_philo *philo);
@@ -66,16 +59,27 @@ int			take_fork_r(t_philo *philo);
 int			drop_fork_l(t_philo *philo);
 int			drop_fork_r(t_philo *philo);
 
+// libft.c
+int		ft_atoi(const char *nptr);
+void	ft_bzero(void *s, size_t n);
+void	*ft_calloc(size_t nmemb, size_t size);
+int		ft_isdigit(int c);
+size_t	ft_strlen(const char *s);
+
 // parsing.c
 int			parsing(int argc, char *argv[], t_info *info);
 pthread_t	*init_t_id(int num_philo);
 void		init_info(int argc, t_info *info);
 int			init_mutex(t_info *info);
 
+// philo.c
+int			start_philo(t_info *info, t_philo *philo);
+t_philo		*create_philo(t_info	*info);
+t_philo		*init_philo(t_info *info);
+
 // util.c
 long		get_time(void);
 int			check_isnum(int argc, char *argv[]);
 void		ft_usleep(useconds_t t);
-void		philo_exit(t_info *info);
-void		print_state(t_philo *philo, int state, long time);
+void		print_state(t_philo *philo, int state);
 #endif

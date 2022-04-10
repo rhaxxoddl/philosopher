@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create.c                                           :+:      :+:    :+:   */
+/*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 21:55:41 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/07 09:28:48 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/10 16:57:48 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,15 @@ int	start_philo(t_info *info, t_philo *philo)
 			current_time = get_time();
 			if ((current_time - philo[i].last_eat) > philo[i].info->time_die)
 			{
-				philo[i].info->is_end = 1;
-				print_state(&(philo[i]), 4, current_time);
+				print_state(&(philo[i]), 4);
 				return (1);
 			}
 		}
 		if (full_philo >= info->num_philo)
-			break ;
+		{
+			info->is_end = 1;
+			return (1) ;
+		}
 	}
 	return (1);
 }
@@ -56,13 +58,7 @@ t_philo	*create_philo(t_info	*info)
 		status = pthread_create(&(info->t_id[i]), NULL,
 				routine, (void *)&philo[i]);
 		if (status < 0)
-			p_error("Error\n: Failed create thread", info, philo);
-	}
-	i = 0;
-	while (++i < info->num_philo)
-	{
-		if (pthread_detach(info->t_id[i]) != 0)
-			p_error("Error\n: Failed detach thread", info, philo);
+			ft_exit(info, philo);
 	}
 	return (philo);
 }

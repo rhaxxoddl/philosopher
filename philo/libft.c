@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   libft.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sanjeon <sanjeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 23:21:36 by sanjeon           #+#    #+#             */
-/*   Updated: 2021/10/25 14:04:42 by sanjeon          ###   ########.fr       */
+/*   Created: 2022/04/10 16:58:51 by sanjeon           #+#    #+#             */
+/*   Updated: 2022/04/10 17:00:04 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "philo.h"
 
 int	ft_atoi(const char *nptr)
 {
@@ -34,4 +34,39 @@ int	ft_atoi(const char *nptr)
 	while (str[i] && str[i] >= 48 && str[i] <= 57)
 		num = num * 10 - str[i++] + '0';
 	return (sign * num);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	while (n--)
+		*(unsigned char *)s++ = 0;
+}
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*m;
+
+	m = malloc(nmemb * size);
+	if (m == 0)
+		return (0);
+	ft_bzero(m, nmemb * size);
+	return (m);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	else
+		return (0);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	len;
+
+	len = 0;
+	while (s[len] != 0)
+		len++;
+	return (len);
 }

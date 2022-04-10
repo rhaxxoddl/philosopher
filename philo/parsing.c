@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:19:53 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/07 08:57:07 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/10 17:17:37 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int	parsing(int argc, char *argv[], t_info *info)
 		info->req_eat = -1;
 	info->fork = (int *)ft_calloc((info->num_philo) + 1, sizeof(int));
 	if (init_mutex(info) == 0)
-		p_error("Error\n: Failed init mutex", info, 0);
+		return (0);
 	info->t_id = init_t_id(info->num_philo);
 	if (info->t_id == 0)
-		p_error("Error\n: Failed allocate t_pid", info, 0);
+		return (0);
 	return (1);
 }
 

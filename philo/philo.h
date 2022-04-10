@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:35:28 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/10 17:16:32 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/10 17:22:30 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			even_eat(t_philo *philo);
 void		sleep_and_think(t_philo *philo);
 
 // error.c
-int			ft_exit(t_info *info, t_philo *philo);
+void		ft_exit(t_info *info, t_philo *philo);
 void		free_info(t_info *info);
 int			free_t_id(pthread_t **t_id);
 void		all_mutex_destroy(t_info *info);

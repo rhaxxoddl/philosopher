@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 17:03:14 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/10 16:38:42 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/10 18:48:22 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	print_state(t_philo *philo, int state)
 		philo->info->is_end = 1;
 		printf("%ldms %d is died\n",
 			get_time() - philo->info->start_time, philo->philo_seq);
-		return ;
 	}
 	pthread_mutex_unlock(&(philo->info->m[0]));
 }

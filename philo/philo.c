@@ -6,41 +6,38 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 21:55:41 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/10 16:57:48 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/10 19:09:53 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	start_philo(t_info *info, t_philo *philo)
+void	start_philo(t_info *info, t_philo *philo)
 {
 	int		i;
 	int		full_philo;
-	long	current_time;
 
 	while (1)
 	{
 		i = 0;
 		full_philo = 0;
-		current_time = 0;
 		while (++i <= info->num_philo)
 		{
 			if (info->req_eat >= 0 && philo[i].num_eat >= info->req_eat)
 				full_philo++;
-			current_time = get_time();
-			if ((current_time - philo[i].last_eat) > philo[i].info->time_die)
+			if ((get_time() - philo[i].last_eat) > philo[i].info->time_die)
 			{
 				print_state(&(philo[i]), 4);
-				return (1);
+				return ;
 			}
 		}
 		if (full_philo >= info->num_philo)
 		{
 			info->is_end = 1;
-			return (1) ;
+			return ;
 		}
 	}
-	return (1);
+	return ;
 }
 
 t_philo	*create_philo(t_info	*info)
@@ -58,7 +55,7 @@ t_philo	*create_philo(t_info	*info)
 		status = pthread_create(&(info->t_id[i]), NULL,
 				routine, (void *)&philo[i]);
 		if (status < 0)
-			ft_exit(info, philo);
+			return (0);
 	}
 	return (philo);
 }

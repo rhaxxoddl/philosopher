@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:35:28 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/10 17:22:30 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/10 19:09:41 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			even_eat(t_philo *philo);
 void		sleep_and_think(t_philo *philo);
 
 // error.c
-void		ft_exit(t_info *info, t_philo *philo);
+int			ft_exit(t_info *info, t_philo *philo);
 void		free_info(t_info *info);
 int			free_t_id(pthread_t **t_id);
 void		all_mutex_destroy(t_info *info);
@@ -60,11 +60,11 @@ int			drop_fork_l(t_philo *philo);
 int			drop_fork_r(t_philo *philo);
 
 // libft.c
-int		ft_atoi(const char *nptr);
-void	ft_bzero(void *s, size_t n);
-void	*ft_calloc(size_t nmemb, size_t size);
-int		ft_isdigit(int c);
-size_t	ft_strlen(const char *s);
+int			ft_atoi(const char *nptr);
+void		ft_bzero(void *s, size_t n);
+void		*ft_calloc(size_t nmemb, size_t size);
+int			ft_isdigit(int c);
+size_t		ft_strlen(const char *s);
 
 // parsing.c
 int			parsing(int argc, char *argv[], t_info *info);
@@ -73,7 +73,7 @@ void		init_info(int argc, t_info *info);
 int			init_mutex(t_info *info);
 
 // philo.c
-int			start_philo(t_info *info, t_philo *philo);
+void		start_philo(t_info *info, t_philo *philo);
 t_philo		*create_philo(t_info	*info);
 t_philo		*init_philo(t_info *info);
 

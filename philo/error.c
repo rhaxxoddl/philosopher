@@ -6,18 +6,20 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 22:13:59 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/10 17:22:21 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/10 18:49:30 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_exit(t_info *info, t_philo *philo)
+int	ft_exit(t_info *info, t_philo *philo)
 {
 	info->is_end = 1;
 	free_info(info);
 	if (philo != 0)
 		free(philo);
+	free(info);
+	return (0);
 }
 
 void	free_info(t_info *info)

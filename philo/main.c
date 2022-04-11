@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 19:52:43 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/10 19:10:33 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/11 10:34:58 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ int	main(int argc, char *argv[])
 	start_philo(info, philo);
 	i = 0;
 	while (++i <= info->num_philo)
+	{
+		if (info->num_philo == 1)
+			pthread_mutex_unlock(&(info->m[info->num_philo]));
 		pthread_join(info->t_id[i], NULL);
+	}
 	return (ft_exit(info, philo));
 }

@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 21:55:41 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/10 19:09:53 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/11 10:26:22 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	start_philo(t_info *info, t_philo *philo)
 				full_philo++;
 			if ((get_time() - philo[i].last_eat) > philo[i].info->time_die)
 			{
-				print_state(&(philo[i]), 4);
+				print_state(&(philo[i]), DIE);
 				return ;
 			}
 		}

@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 13:30:07 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/10 16:42:12 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/11 10:37:01 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ void	*routine(void *a)
 			return (0);
 		if (philo->philo_seq % 2 == 0)
 		{
-			if (even_eat(philo) == 0)
+			usleep(100);
+			if (philo->info->is_end == 1 || even_eat(philo) == 0)
 				return (0);
 		}
 		else
 		{
-			usleep(100);
-			if (odd_eat(philo) == 0)
+			if (philo->info->is_end == 1 || odd_eat(philo) == 0)
 				return (0);
 		}
 		sleep_and_think(philo);
@@ -43,7 +43,7 @@ int	odd_eat(t_philo *philo)
 		return (0);
 	if (take_fork_r(philo) == 0)
 		return (0);
-	print_state(philo, 1);
+	print_state(philo, EAT);
 	ft_usleep(philo->info->time_eat);
 	if (drop_fork_l(philo) == 0)
 		return (0);
@@ -58,7 +58,7 @@ int	even_eat(t_philo *philo)
 		return (0);
 	if (take_fork_l(philo) == 0)
 		return (0);
-	print_state(philo, 1);
+	print_state(philo, EAT);
 	ft_usleep(philo->info->time_eat);
 	if (drop_fork_r(philo) == 0)
 		return (0);
@@ -69,7 +69,7 @@ int	even_eat(t_philo *philo)
 
 void	sleep_and_think(t_philo *philo)
 {
-	print_state(philo, 2);
+	print_state(philo, SLEEP);
 	ft_usleep(philo->info->time_sleep);
-	print_state(philo, 3);
+	print_state(philo, THINK);
 }

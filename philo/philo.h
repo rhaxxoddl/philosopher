@@ -6,7 +6,7 @@
 /*   By: sanjeon <sanjeon@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/27 18:35:28 by sanjeon           #+#    #+#             */
-/*   Updated: 2022/04/10 19:09:41 by sanjeon          ###   ########.fr       */
+/*   Updated: 2022/04/11 10:26:51 by sanjeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@
 # include <stdio.h>
 # include <sys/time.h>
 # include <unistd.h>
+
+enum	e_state
+{
+	FORK,
+	EAT,
+	SLEEP,
+	THINK,
+	DIE,
+};
 
 typedef struct s_info
 {
